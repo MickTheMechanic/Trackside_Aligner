@@ -148,39 +148,31 @@ static char Server_HTML [] PROGMEM = R"=====(
     #Toe,
     #CamberRight,
     #CamberLeft {
-      font-size: 4em;
+      font-size: 3.5em;
     }
   </style>
   <script>
   
     function handleData(val) {
 
-      let minutesL = (val[4]).toLocaleString(undefined, {minimumIntegerDigits: 2});
-      let minutesR = (val[9]).toLocaleString(undefined, {minimumIntegerDigits: 2});
+      document.getElementById('CamberLeft').innerHTML = val.camber_left;
+      document.getElementById('FrontLeft').style.transform = 'rotate(' + val.tire_left + 'deg)'; 
+      document.getElementById('LeftLine').style.transform = 'rotate(' + val.line_left + 'deg)';
       
-      //let degreesL = val[2].toString(); 
-      //degreesL = degreesL.substring(0,degreesL.length - 1);
-      //degreesL = degreesL + val[3];
       
-      //let degreesR = val[7].toString(); 
-      //degreesR = degreesR.substring(0,degreesR.length - 1);
-      //degreesR = degreesR + val[8];
+      //document.getElementById('CamberRight').innerHTML = val.camber_right;
+      //document.getElementById('FrontRight').style.transform = 'rotate(' + val.tire_right + 'deg)';
+      //document.getElementById('RightLine').style.transform = 'rotate(' + val.line_right + 'deg)';
+      document.getElementById('CamberRight').innerHTML = val.camber_left;
+      document.getElementById('FrontRight').style.transform = 'rotate(' + val.line_left + 'deg)';
+      document.getElementById('RightLine').style.transform = 'rotate(' + val.tire_left + 'deg)';
       
-      document.getElementById('FrontLeft').style.transform = 'rotate(' + val[0] + 'deg)'; 
-      document.getElementById('LeftLine').style.transform = 'rotate(' + val[1] + 'deg)';
       
-      document.getElementById('CamberLeft').innerHTML = val[2] + "°" + val[3] + "'";
-      
-      document.getElementById('FrontRight').style.transform = 'rotate(' + val[4] + 'deg)';
-      document.getElementById('RightLine').style.transform = 'rotate(' + val[5] + 'deg)';
-      
-      document.getElementById('CamberRight').innerHTML = val[6] + "°" + val[7] + "'";
-      
-      document.getElementById('TopLeft').style.transform = 'rotate(' + val[8] + 'deg)';
-      document.getElementById('TopLeftLine').style.transform = 'rotate(' + val[9] + 'deg)';
-      document.getElementById('TopRight').style.transform = 'rotate(' + val[10] + 'deg)';
-      document.getElementById('TopRightLine').style.transform = 'rotate(' + val[11] + 'deg)';
-      document.getElementById('Toe').innerHTML = val[12] + "°" + val[13] + "'";
+      document.getElementById('TopLeft').style.transform = 'rotate(' + val.toe_angle_invert + 'deg)';
+      document.getElementById('TopLeftLine').style.transform = 'rotate(' + val.toe_angle + 'deg)';
+      document.getElementById('TopRight').style.transform = 'rotate(' + val.toe_angle + 'deg)';
+      document.getElementById('TopRightLine').style.transform = 'rotate(' + val.toe_angle_invert + 'deg)';
+      document.getElementById('Toe').innerHTML = val.toe_total;
     }
 
     function getdata() {
